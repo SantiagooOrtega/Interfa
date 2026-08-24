@@ -10,36 +10,32 @@ const featuredApps = [
     tag: "ESSENTIALS",
     title: "Change Your Word View",
     subtitle: "Microsoft Word · Create a Resume",
-    gradient: "linear-gradient(135deg, #1a6cf6 0%, #0ea5e9 100%)",
-    emoji: "💼",
-    accentBg: "#1e3a8a",
+    image: "/card1.jpg",
+    gradient: "linear-gradient(to top, rgba(46,16,101,0.85) 0%, transparent 60%)",
   },
   {
     id: 2,
-    tag: "OUR FAVORITES",
-    title: "A New Way to Play Classic Games",
-    subtitle: "Apple Arcade · Game Room",
-    gradient: "linear-gradient(135deg, #f97316 0%, #ec4899 100%)",
-    emoji: "♟️",
-    accentBg: "#7c2d12",
-  },
-  {
-    id: 3,
     tag: "TRY NOW",
     title: "Get Behind the Wheel of an F1 Car",
     subtitle: "JigSpace · Unforgettable 3D",
-    gradient: "linear-gradient(135deg, #7f1d1d 0%, #1c1917 100%)",
-    emoji: "🏎️",
-    accentBg: "#450a0a",
+    image: "/card2.jpg",
+    gradient: "linear-gradient(to top, rgba(69,10,10,0.9) 0%, transparent 60%)",
+  },
+  {
+    id: 3,
+    tag: "OUR FAVORITES",
+    title: "A New Way to Play Classic Games",
+    subtitle: "Apple Arcade · Game Room",
+    image: "/card3.jpg",
+    gradient: "linear-gradient(to top, rgba(124,45,18,0.85) 0%, transparent 60%)",
   },
   {
     id: 4,
     tag: "INCREDIBLE INDIE",
     title: "Search for Clues in Blackbox",
     subtitle: "Blackbox · Think outside the...",
-    gradient: "linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%)",
-    emoji: "🔮",
-    accentBg: "#2e1065",
+    image: "/card4.jpg",
+    gradient: "linear-gradient(to top, rgba(10,40,80,0.85) 0%, transparent 60%)",
   },
 ];
 
@@ -101,7 +97,7 @@ function SidebarIcon({ children, active = false }: { children: React.ReactNode; 
   );
 }
 
-function FeaturedCard({ app, index }: { app: typeof featuredApps[0]; index: number }) {
+function FeaturedCard({ app }: { app: typeof featuredApps[0] }) {
   return (
     <div
       className="featured-card"
@@ -109,7 +105,6 @@ function FeaturedCard({ app, index }: { app: typeof featuredApps[0]; index: numb
         width: 155,
         height: 215,
         borderRadius: 18,
-        background: app.gradient,
         border: "1px solid rgba(255,255,255,0.2)",
         boxShadow: "0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.3)",
         position: "relative",
@@ -117,36 +112,48 @@ function FeaturedCard({ app, index }: { app: typeof featuredApps[0]; index: numb
         flexShrink: 0,
         cursor: "pointer",
         transition: "transform 0.3s, box-shadow 0.3s",
+        background: "#111",
       }}
     >
-      {/* Glass shine overlay */}
+      {/* Background image */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={app.image}
+        alt={app.title}
+        style={{
+          position: "absolute",
+          inset: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          objectPosition: "center",
+        }}
+      />
+
+      {/* Gradient overlay for readability */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: app.gradient,
+          pointerEvents: "none",
+        }}
+      />
+
+      {/* Glass shine top */}
       <div
         style={{
           position: "absolute",
           top: 0,
           left: 0,
           right: 0,
-          height: "50%",
-          background: "linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, transparent 100%)",
-          borderRadius: "18px 18px 0 0",
+          height: "40%",
+          background: "linear-gradient(to bottom, rgba(255,255,255,0.1) 0%, transparent 100%)",
           pointerEvents: "none",
         }}
       />
-      {/* emoji illustration */}
-      <div
-        style={{
-          position: "absolute",
-          top: "18%",
-          left: "50%",
-          transform: "translateX(-50%)",
-          fontSize: 52,
-          filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.4))",
-          userSelect: "none",
-        }}
-      >
-        {app.emoji}
-      </div>
-      {/* bottom overlay */}
+
+      {/* Bottom content */}
       <div
         style={{
           position: "absolute",
@@ -154,8 +161,6 @@ function FeaturedCard({ app, index }: { app: typeof featuredApps[0]; index: numb
           left: 0,
           right: 0,
           padding: "10px 12px",
-          background: "linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%)",
-          borderRadius: "0 0 18px 18px",
         }}
       >
         <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: "0.08em", color: "rgba(255,255,255,0.65)", marginBottom: 4, textTransform: "uppercase" }}>
@@ -244,32 +249,17 @@ export default function Home() {
         style={{
           position: "absolute",
           inset: 0,
-          background: "linear-gradient(135deg, #e8e0d4 0%, #d5c9b8 30%, #c8bba6 60%, #b8ab98 100%)",
+          backgroundImage: "url('/bg.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
       />
-      {/* Warm room atmosphere overlay */}
+      {/* subtle dark tint so glass panels pop */}
       <div
         style={{
           position: "absolute",
           inset: 0,
-          background: `
-            radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,240,220,0.7) 0%, transparent 60%),
-            radial-gradient(ellipse 60% 40% at 20% 80%, rgba(200,180,160,0.5) 0%, transparent 50%),
-            radial-gradient(ellipse 50% 50% at 80% 90%, rgba(180,160,140,0.4) 0%, transparent 50%)
-          `,
-        }}
-      />
-      {/* Room details — subtle architectural lines */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          backgroundImage: `
-            linear-gradient(to right, rgba(0,0,0,0.04) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px)
-          `,
-          backgroundSize: "120px 120px",
-          opacity: 0.3,
+          background: "rgba(0,0,0,0.15)",
         }}
       />
 
@@ -440,9 +430,9 @@ export default function Home() {
               scrollSnapType: "x mandatory",
             }}
           >
-            {featuredApps.map((app, i) => (
+            {featuredApps.map((app) => (
               <div key={app.id} style={{ scrollSnapAlign: "start" }}>
-                <FeaturedCard app={app} index={i} />
+                <FeaturedCard app={app} />
               </div>
             ))}
           </div>
